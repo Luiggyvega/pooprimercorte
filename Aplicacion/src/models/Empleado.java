@@ -1,4 +1,7 @@
+package models;
+
 public class Empleado {
+    private String codigo;
     private String nombreEmpleado;
     private int horasTrabajadas;
     private double valorHora;
@@ -10,10 +13,16 @@ public class Empleado {
         this.valorHora = 0;
     }
 
-    public Empleado(String nombreEmpleado, int horasTrabajadas, double valorHora) {
+    public Empleado(String codigo, String nombreEmpleado, int horasTrabajadas, double valorHora, double sueldo) {
+        this.codigo = codigo;
         this.nombreEmpleado = nombreEmpleado;
         this.horasTrabajadas = horasTrabajadas;
         this.valorHora = valorHora;
+        this.sueldo= sueldo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public void setNombreEmpleado(String nombreEmpleado) {
@@ -27,8 +36,9 @@ public class Empleado {
     public void setValorHora(double valorHora) {
         this.valorHora = valorHora;
     }
-    public void calcularsueldo(){
-        this.sueldo = this.horasTrabajadas * this.valorHora;
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public String getNombreEmpleado() {

@@ -2,8 +2,6 @@ package services;
 
 import models.Empleado;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class EmpleadoService {
@@ -45,14 +43,48 @@ public class EmpleadoService {
 
     private void listarEmpleado() {
         System.out.println("LISTA DE EMPLEADOS");
-        System.out.println(Arrays.toString(listaEmpleado));
+        for (int  i = 0; i < listaEmpleado.length; i++) {
+            System.out.println("nombre del empleado: " + listaEmpleado[i].getNombreEmpleado() + "| sueldo del empleado: " + listaEmpleado[i].getSueldo());
+
+        }
     }
 
-    private void buscarEmpleado() {
+    private int buscarEmpleado() {
+        System.out.println("BUSCAR EMPLEADO");
+        System.out.println("Ingrese el codigo del empleado");
+        String codigo = sc.next();
+        for (int i=0; i < listaEmpleado.length; i++){
+            if (listaEmpleado[i].getCodigo().equals(codigo)) {
+                System.out.println("El empleado es: " + listaEmpleado[i].getNombreEmpleado());
+
+            }
+            else System.out.println("El empleado no existe");
+        }
+
+
+        return 0;
     }
 
-    private void modificarEmpleado() {
+    private double modificarEmpleado() {
+        System.out.println("MODIFICAR EMPLEADO");
+        int posicion = buscarEmpleado();
+        if (posicion != -1) {
+            empleado = listaEmpleado[posicion];
+            System.out.println("Ingrese el nuevo nombre");
+            empleado.setNombreEmpleado(sc.next());
+            System.out.println("Ingrese las horas");
+            int horas = sc.nextInt();
+            empleado.setHorasTrabajadas(horas);
+            System.out.println("Ingrese las valor de la hora");
+            double valor = sc.nextDouble();
+            empleado.setValorHora(valor);
+           empleado.getSueldo(calcularSalario(horas,valor))
+        }
+        return 0;
     }
+        private double calcularSalario(int horas, double valor) {
+            return horas * valor;
+        }
 
     private void crearEmpleado() {
         System.out.println("CREAR EMPLEADOS");
@@ -68,7 +100,6 @@ public class EmpleadoService {
             double valorHora = sc.nextDouble();
             listaEmpleado[i] = new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas*valorHora);
         }
-
     }
 
     private void crearListaEmpleado() {
@@ -76,3 +107,6 @@ public class EmpleadoService {
         listaEmpleado = new Empleado[sc.nextInt()];
     }
 }
+
+
+

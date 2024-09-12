@@ -48,4 +48,7 @@ public class Empleado {
     public double getSueldo() {
         return sueldo;
     }
+
+    public void getSueldo(double v) {
+    }
 }

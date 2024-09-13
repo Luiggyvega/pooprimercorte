@@ -2,16 +2,17 @@ package services;
 
 import models.Empleado;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EmpleadoService {
     private Scanner sc;
     private Empleado empleado;
-    private Empleado[] listaEmpleado;
+    private ArrayList<Empleado> listaEmpleado;
 
     public EmpleadoService() {
+        listaEmpleado = new ArrayList<>();
         sc = new Scanner(System.in);
-        crearListaEmpleado();
     }
 
     public void menu() {
@@ -43,8 +44,8 @@ public class EmpleadoService {
 
     private void listarEmpleado() {
         System.out.println("LISTA DE EMPLEADOS");
-        for (int  i = 0; i < listaEmpleado.length; i++) {
-            System.out.println("nombre del empleado: " + listaEmpleado[i].getNombreEmpleado() + "| sueldo del empleado: " + listaEmpleado[i].getSueldo());
+        for (Empleado empleado : listaEmpleado) {
+            System.out.println("nombre del empleado: " + empleado.getNombreEmpleado() + " sueldo " + empleado.getSueldo());
 
         }
     }
@@ -53,60 +54,64 @@ public class EmpleadoService {
         System.out.println("BUSCAR EMPLEADO");
         System.out.println("Ingrese el codigo del empleado");
         String codigo = sc.next();
-        for (int i=0; i < listaEmpleado.length; i++){
-            if (listaEmpleado[i].getCodigo().equals(codigo)) {
-                System.out.println("El empleado es: " + listaEmpleado[i].getNombreEmpleado());
-
+        Empleado empleadoEncontado = null;
+        for (Empleado empleado : listaEmpleado) {
+            if (empleado.getCodigo().equals(codigo)) {
+                System.out.println("El codigo corresponde a: " + empleado.getNombreEmpleado());
+                empleadoEncontado = empleado;
             }
-            else System.out.println("El empleado no existe");
         }
-
-
-        return 0;
+        return listaEmpleado.indexOf(empleadoEncontado);
     }
 
     private double modificarEmpleado() {
         System.out.println("MODIFICAR EMPLEADO");
         int posicion = buscarEmpleado();
         if (posicion != -1) {
-            empleado = listaEmpleado[posicion];
+            empleado = listaEmpleado.get(posicion);
             System.out.println("Ingrese el nuevo nombre");
             empleado.setNombreEmpleado(sc.next());
             System.out.println("Ingrese las horas");
             int horas = sc.nextInt();
             empleado.setHorasTrabajadas(horas);
-            System.out.println("Ingrese las valor de la hora");
+            System.out.println("Ingrese valor de la hora");
             double valor = sc.nextDouble();
             empleado.setValorHora(valor);
-           empleado.getSueldo(calcularSalario(horas,valor))
+
         }
         return 0;
     }
-        private double calcularSalario(int horas, double valor) {
-            return horas * valor;
-        }
 
     private void crearEmpleado() {
         System.out.println("CREAR EMPLEADOS");
-        for (int i = 0; i < listaEmpleado.length; i++) {
-            System.out.println("Empleado nuevo");
-            System.out.println("ingrese el codigo del empleado");
-            String codigo = sc.next();
-            System.out.println("ingrese el nombre del empleado");
-            String nombreEmpleado = sc.next();
-            System.out.println(" ingrese horas Trabajadas");
-            int horasTrabajadas = sc.nextInt();
-            System.out.println("ingrese el valor de la hora trabajada");
-            double valorHora = sc.nextDouble();
-            listaEmpleado[i] = new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas*valorHora);
+        System.out.println("Empleado nuevo");
+        System.out.println("ingrese el codigo del empleado");
+        String codigo = sc.next();
+        if (codigoYaExiste(codigo)) {
+            System.out.println("El código del empleado ya existe: ingrese un código único.");
+            return;
         }
+        System.out.println("ingrese el nombre del empleado");
+        String nombreEmpleado = sc.next();
+        System.out.println(" ingrese horas Trabajadas");
+        int horasTrabajadas = sc.nextInt();
+        System.out.println("ingrese el valor de la hora trabajada");
+        double valorHora = sc.nextDouble();
+        listaEmpleado.add(new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas * valorHora));
     }
 
-    private void crearListaEmpleado() {
-        System.out.println("ingrese la cantidad de empleados de la empresa X");
-        listaEmpleado = new Empleado[sc.nextInt()];
+    private boolean codigoYaExiste(String codigo) {
+        for (Empleado empleado : listaEmpleado) {
+            if (empleado.getCodigo().equals(codigo)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
+
+
+
 
 
 

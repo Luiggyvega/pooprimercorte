@@ -18,7 +18,7 @@ public class Empleado {
         this.nombreEmpleado = nombreEmpleado;
         this.horasTrabajadas = horasTrabajadas;
         this.valorHora = valorHora;
-        this.sueldo= sueldo;
+        this.sueldo = sueldo;
     }
 
     public void setCodigo(String codigo) {
@@ -37,9 +37,7 @@ public class Empleado {
         this.valorHora = valorHora;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
+    public String getCodigo() {return codigo;}
 
     public String getNombreEmpleado() {
         return nombreEmpleado;
@@ -49,6 +47,6 @@ public class Empleado {
         return sueldo;
     }
 
-    public void getSueldo(double v) {
-    }
+
 }
+

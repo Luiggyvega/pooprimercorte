@@ -1,13 +1,13 @@
 package services;
 
 import models.Empleado;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EmpleadoService {
     private Scanner sc;
     private Empleado empleado;
+    private DireccionService direccion;
     private ArrayList<Empleado> listaEmpleado;
 
     public EmpleadoService() {
@@ -97,7 +97,8 @@ public class EmpleadoService {
         int horasTrabajadas = sc.nextInt();
         System.out.println("ingrese el valor de la hora trabajada");
         double valorHora = sc.nextDouble();
-        listaEmpleado.add(new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas * valorHora));
+        DireccionService direccion = new DireccionService();
+        listaEmpleado.add(new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas * valorHora, direccion));
     }
 
     private boolean codigoYaExiste(String codigo) {

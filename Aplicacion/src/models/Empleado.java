@@ -1,19 +1,16 @@
 package models;
 
+import services.DireccionService;
+
 public class Empleado {
     private String codigo;
     private String nombreEmpleado;
     private int horasTrabajadas;
     private double valorHora;
     private double sueldo;
+    private DireccionService direccion;
 
-    public Empleado() {
-        this.nombreEmpleado = "no definido";
-        this.horasTrabajadas = 0;
-        this.valorHora = 0;
-    }
-
-    public Empleado(String codigo, String nombreEmpleado, int horasTrabajadas, double valorHora, double sueldo) {
+    public Empleado(String codigo, String nombreEmpleado, int horasTrabajadas, double valorHora, double sueldo, DireccionService direccion) {
         this.codigo = codigo;
         this.nombreEmpleado = nombreEmpleado;
         this.horasTrabajadas = horasTrabajadas;
@@ -47,6 +44,8 @@ public class Empleado {
         return sueldo;
     }
 
-
+    public DireccionService getDireccion() {
+        return direccion;
+    }
 }
 

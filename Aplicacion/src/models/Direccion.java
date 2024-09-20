@@ -15,6 +15,26 @@ public class Direccion {
         this.codigoPostal = codigoPostal;
     }
 
+    public String getCalle() {
+        return calle;
+    }
+
+    public String getNumeroCasa() {
+        return numeroCasa;
+    }
+
+    public String getBarrio() {
+        return barrio;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
     @Override
     public String toString() {
         return "Direccion{" +

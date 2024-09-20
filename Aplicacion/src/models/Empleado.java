@@ -8,15 +8,17 @@ public class Empleado {
     private int horasTrabajadas;
     private double valorHora;
     private double sueldo;
-    private DireccionService direccion;
+    private Direccion direccion;
 
-    public Empleado(String codigo, String nombreEmpleado, int horasTrabajadas, double valorHora, double sueldo, DireccionService direccion) {
+    public Empleado(String codigo, String nombreEmpleado, int horasTrabajadas, double valorHora, double sueldo, Direccion direccion) {
         this.codigo = codigo;
         this.nombreEmpleado = nombreEmpleado;
         this.horasTrabajadas = horasTrabajadas;
         this.valorHora = valorHora;
         this.sueldo = sueldo;
+        this.direccion = direccion;
     }
+
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
@@ -44,8 +46,11 @@ public class Empleado {
         return sueldo;
     }
 
-    public DireccionService getDireccion() {
+    public Direccion getDireccion() {
         return direccion;
     }
 }
+
+
+
 

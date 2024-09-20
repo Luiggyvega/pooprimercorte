@@ -11,7 +11,9 @@ public class DireccionService {
     public DireccionService() {
         sc = new Scanner(System.in);
     }
-    public void crear(){
+
+    public Direccion crear(){
+        System.out.println("Creacion de Direccion");
         System.out.println("ingrese la calle en la que vive" );
         String calle = sc.next();
         System.out.println("ingrese el numero de la casa");
@@ -22,7 +24,7 @@ public class DireccionService {
         String ciudad = sc.next();
         System.out.println("ingrese el codigo postal");
         String postal = sc.next();
-        direccion = new Direccion(calle, numeroCasa, barrio, ciudad, postal);
-
+        Direccion direccion = new Direccion(calle, numeroCasa, barrio, ciudad, postal);
+        return direccion;
     }
 }

@@ -1,18 +1,23 @@
 package services;
 
+import models.Direccion;
 import models.Empleado;
-import java.util.ArrayList;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EmpleadoService {
     private Scanner sc;
     private Empleado empleado;
-    private DireccionService direccion;
-    private ArrayList<Empleado> listaEmpleado;
+    private Direccion direccion;
+    private DireccionService direccionService;
+    private Map<String, Empleado> listaEmpleado;
 
     public EmpleadoService() {
-        listaEmpleado = new ArrayList<>();
+        listaEmpleado = new HashMap<>();
         sc = new Scanner(System.in);
+        direccionService = new DireccionService();
     }
 
     public void menu() {
@@ -44,31 +49,29 @@ public class EmpleadoService {
 
     private void listarEmpleado() {
         System.out.println("LISTA DE EMPLEADOS");
-        for (Empleado empleado : listaEmpleado) {
+        for (Empleado empleado : listaEmpleado.values()) {
             System.out.println("nombre del empleado: " + empleado.getNombreEmpleado() + " sueldo " + empleado.getSueldo());
-
         }
     }
 
-    private int buscarEmpleado() {
+    private void buscarEmpleado() {
         System.out.println("BUSCAR EMPLEADO");
         System.out.println("Ingrese el codigo del empleado");
         String codigo = sc.next();
-        Empleado empleadoEncontado = null;
-        for (Empleado empleado : listaEmpleado) {
-            if (empleado.getCodigo().equals(codigo)) {
-                System.out.println("El codigo corresponde a: " + empleado.getNombreEmpleado());
-                empleadoEncontado = empleado;
-            }
+        Empleado empleadoEncontado = listaEmpleado.get(codigo);
+        if (empleadoEncontado != null) {
+            System.out.println("El codigo corresponde a: " + empleadoEncontado.getNombreEmpleado());
+        } else{
+            System.out.println("Empleado encontrado");
         }
-        return listaEmpleado.indexOf(empleadoEncontado);
     }
 
     private double modificarEmpleado() {
         System.out.println("MODIFICAR EMPLEADO");
-        int posicion = buscarEmpleado();
-        if (posicion != -1) {
-            empleado = listaEmpleado.get(posicion);
+        System.out.println("ingrese el codigo del empleado");
+        String codigo = sc.next();
+        empleado = listaEmpleado.get(codigo);
+        if (empleado != null) {
             System.out.println("Ingrese el nuevo nombre");
             empleado.setNombreEmpleado(sc.next());
             System.out.println("Ingrese las horas");
@@ -85,31 +88,31 @@ public class EmpleadoService {
     private void crearEmpleado() {
         System.out.println("CREAR EMPLEADOS");
         System.out.println("Empleado nuevo");
-        System.out.println("ingrese el codigo del empleado");
-        String codigo = sc.next();
-        if (codigoYaExiste(codigo)) {
-            System.out.println("El código del empleado ya existe: ingrese un código único.");
-            return;
+        String codigo;
+        do {
+            System.out.println("ingrese el codigo del empleado");
+            codigo = sc.next();
         }
+        while (codigoYaExiste(codigo));
         System.out.println("ingrese el nombre del empleado");
         String nombreEmpleado = sc.next();
         System.out.println(" ingrese horas Trabajadas");
         int horasTrabajadas = sc.nextInt();
         System.out.println("ingrese el valor de la hora trabajada");
         double valorHora = sc.nextDouble();
-        DireccionService direccion = new DireccionService();
-        listaEmpleado.add(new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas * valorHora, direccion));
+        direccion = direccionService.crear();
+        listaEmpleado.put(codigo, new Empleado(codigo, nombreEmpleado, horasTrabajadas, valorHora, horasTrabajadas * valorHora, direccion));
     }
 
     private boolean codigoYaExiste(String codigo) {
-        for (Empleado empleado : listaEmpleado) {
-            if (empleado.getCodigo().equals(codigo)) {
-                return true;
-            }
+        boolean existe = listaEmpleado.containsKey(codigo);
+        if(existe) {
+            System.out.println("codigo ya existe, ingrese otro");
         }
-        return false;
+        return existe;
     }
 }
+
 
 
 

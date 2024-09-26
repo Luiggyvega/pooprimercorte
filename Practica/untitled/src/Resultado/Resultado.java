@@ -35,10 +35,10 @@ public class Resultado {
     public static void mostrarEstudiante() {
 
         for (Estudiantes est : listaEstudiantes) {
-            est.getNotasNuevas();
-            System.out.println("estudiante: " + est.getNombre() + "notas: " + est.getNotasNuevas() );
+            System.out.println("estudiante: " + est.getNombre() + " definitiva: " + est.getNotasNuevas() );
+            }
+
         }
-    }
 
     public static void crearEstudiante() {
         Scanner sc = new Scanner(System.in);
@@ -59,10 +59,13 @@ public class Resultado {
 
         System.out.println("ingrese la nota del examen uno");
         double nota1=sc.nextDouble();
+
         System.out.println("ingrese la nota del examen dos");
         double nota2=sc.nextDouble();
+
         System.out.println("ingrese la nota de la tercera nota");
         double nota3=sc.nextDouble();
+
         System.out.println("ingrese la nota del examen final");
         double nota4=sc.nextDouble();
 

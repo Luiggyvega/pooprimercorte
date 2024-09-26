@@ -31,22 +31,24 @@ public class notasEstudiante {
         this.nota4 = nota4;
     }
 
-    private double examenes = 0.23;
-    private double examenFinal = 0.31;
-
     public double getNota1() {
+
+
         return nota1;
     }
 
     public double getNota2() {
+
         return nota2;
     }
 
     public double getNota3() {
+
         return nota3;
     }
 
     public double getNota4() {
+
         return nota4;
     }
 }

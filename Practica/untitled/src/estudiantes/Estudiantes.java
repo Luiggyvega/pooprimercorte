@@ -39,7 +39,14 @@ public class Estudiantes {
         return nombre;
     }
 
-    public notasEstudiante getNotasNuevas() {
-        return notasNuevas;
+    public double getNotasNuevas() {
+        double parciales = 0.23;
+        double examen = 0.31;
+        double primer= notasNuevas.getNota1()*parciales;
+        double segundo = notasNuevas.getNota2()*parciales;
+        double tercero = notasNuevas.getNota3()*parciales;
+        double cuarto = notasNuevas.getNota4()*examen;
+        double definitiva = primer + segundo + tercero + cuarto;
+        return definitiva;
     }
 }

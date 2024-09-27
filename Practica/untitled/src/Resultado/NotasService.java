@@ -5,15 +5,19 @@ import estudiantes.Estudiantes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import estudiantes.notasEstudiante;
+import estudiantes.NotasEstudiante;
 
-public class Resultado {
+public class NotasService {
 
-    private static ArrayList<Estudiantes> listaEstudiantes = new ArrayList<>();
-    private notasEstudiante notasEstudiante;
-    private static double promedio=0;
+    private static ArrayList<Estudiantes> listaEstudiantes;
+    private NotasEstudiante notasEstudiante;
+    private double promedio;
 
-    public static void registro() {
+    public NotasService() {
+        listaEstudiantes = new ArrayList<>();
+    }
+
+    public void Registro() {
         Scanner sc = new Scanner(System.in);
         char opcion;
         do {
@@ -21,6 +25,7 @@ public class Resultado {
             System.out.println("ingrese 2 para mostar estudiantes y definitivas");
             System.out.println("ingrese 3 para mostrar promedio de notas del grupo");
             System.out.println("ingrese 4 para ver que estudiantes estan debajo del promedio del grupo");
+            System.out.println("ingrese 5 para ver los promedios mas altos");
             System.out.println("Ingrese s para salir");
             System.out.println("Ingrese su opción");
             opcion = sc.next().charAt(0);
@@ -30,6 +35,7 @@ public class Resultado {
                 case '2' -> mostrarEstudiante();
                 case '3' -> mostrarPromedio();
                 case '4' -> menosPromedio();
+                case '5' -> promedioMasAlto();
 
                 default -> {
                     opcion = 's';
@@ -39,34 +45,43 @@ public class Resultado {
         } while (opcion != 's');
     }
 
-    public static void mostrarPromedio() {
+    private void promedioMasAlto(){
+        for (Estudiantes est : listaEstudiantes){
+            if (est.getNotasDefinitivas()>this.promedio+0.5){
+                System.out.println("los mejores promedios son de: " + est.getNombre());
+
+            }
+        }
+    }
+
+    private void mostrarPromedio() {
         double sumaDefinitivas = 0;
         int cantidadEstudiantes = listaEstudiantes.size();
 
         for (Estudiantes est : listaEstudiantes) {
-            sumaDefinitivas += est.getNotasNuevas();
+            sumaDefinitivas += est.getNotasDefinitivas();
         }
-        promedio = sumaDefinitivas / cantidadEstudiantes;
+        this.promedio = sumaDefinitivas / cantidadEstudiantes;
         System.out.println("La cantidad de estudiantes es: " + cantidadEstudiantes);
-        System.out.println("El promedio es: " + promedio);
+        System.out.println("El promedio es: " + this.promedio);
     }
-    public static void menosPromedio() {
+    private void menosPromedio() {
         for (Estudiantes est : listaEstudiantes) {
-            if (promedio>est.getNotasNuevas()) {
-                System.out.println("los promedios mas bajos son de " + est.getNombre());
+            if (est.getNotasDefinitivas()<promedio) {
+                System.out.println("Definitivas por debajo del promedio " + est.getNombre());
             }
         }
 
     }
-    public static void mostrarEstudiante() {
+    private void mostrarEstudiante() {
 
         for (Estudiantes est : listaEstudiantes) {
-            System.out.println("estudiante: " + est.getNombre() + " definitiva: " + est.getNotasNuevas());
+            System.out.println("estudiante: " + est.getNombre() + " definitiva: " + est.getNotasDefinitivas());
         }
 
     }
 
-    public static void crearEstudiante() {
+    private void crearEstudiante() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Ingrese los datos del estudiante");
@@ -95,7 +110,7 @@ public class Resultado {
         System.out.println("ingrese la nota del examen final");
         double nota4 = sc.nextDouble();
 
-        notasEstudiante notas = new notasEstudiante(nota1, nota2, nota3, nota4);
+        NotasEstudiante notas = new NotasEstudiante(nota1, nota2, nota3, nota4);
         Estudiantes estudiante = new Estudiantes(nombre, codigo, edad, carrera, notas);
         listaEstudiantes.add(estudiante);
 

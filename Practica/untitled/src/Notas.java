@@ -1,8 +1,9 @@
-import Resultado.Resultado;
+import Resultado.NotasService;
 
 public class Notas {
     public static void main(String[] args) {
-        Resultado.registro();
+    NotasService notasService = new NotasService();
+    notasService.Registro();
     }
 
 }

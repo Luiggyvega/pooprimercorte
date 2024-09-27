@@ -1,14 +1,12 @@
 package estudiantes;
 
-import java.util.Scanner;
-
-public class notasEstudiante {
+public class NotasEstudiante {
     private double nota1;
     private double nota2;
     private double nota3;
     private double nota4;
 
-    public notasEstudiante(double nota1, double nota2, double nota3, double nota4) {
+    public NotasEstudiante(double nota1, double nota2, double nota3, double nota4) {
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;

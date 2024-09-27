@@ -5,9 +5,11 @@ public class Estudiantes {
     private String codigo;
     private String edad;
     private String carrera;
-    private notasEstudiante notasNuevas;
+    private NotasEstudiante notasNuevas;
+    private static double Parciales = 0.23;
+    private static double Examen = 0.31;
 
-    public Estudiantes(String nombre, String codigo, String edad, String carrera, notasEstudiante notasNuevas) {
+    public Estudiantes(String nombre, String codigo, String edad, String carrera, NotasEstudiante notasNuevas) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.edad = edad;
@@ -31,7 +33,7 @@ public class Estudiantes {
         this.carrera = carrera;
     }
 
-    public void setNotasNuevas(notasEstudiante notasNuevas) {
+    public void setNotasNuevas(NotasEstudiante notasNuevas) {
         this.notasNuevas = notasNuevas;
     }
 
@@ -39,13 +41,12 @@ public class Estudiantes {
         return nombre;
     }
 
-    public double getNotasNuevas() {
-        double parciales = 0.23;
-        double examen = 0.31;
-        double primer= notasNuevas.getNota1()*parciales;
-        double segundo = notasNuevas.getNota2()*parciales;
-        double tercero = notasNuevas.getNota3()*parciales;
-        double cuarto = notasNuevas.getNota4()*examen;
+    public double getNotasDefinitivas() {
+
+        double primer= notasNuevas.getNota1()*Parciales;
+        double segundo = notasNuevas.getNota2()*Parciales;
+        double tercero = notasNuevas.getNota3()*Parciales;
+        double cuarto = notasNuevas.getNota4()*Examen;
         double definitiva = primer + segundo + tercero + cuarto;
         return definitiva;
     }

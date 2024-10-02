@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionAlmacen {
-    private static ArrayList<Articulo> listadoArticulos;
-
+    private ArrayList<Articulo> listadoArticulos;
 
     public GestionAlmacen() {
         listadoArticulos = new ArrayList<>();
@@ -45,36 +44,87 @@ public class GestionAlmacen {
 
     private void articulosDisponible() {
         for (Articulo articulos : listadoArticulos) {
-            System.out.println("los aticulos que hay son: " + articulos.getDescripcion() + " codigo del articulo: " + articulos.getCodigo() + " cantidad de articulos disponibles: " + articulos.getSrock());
+            System.out.println("los aticulos que hay son:" + articulos.getDescripcion()  + " codigo del articulo: " + articulos.getCodigo()  + " cantidad de articulos disponibles: " + articulos.getSrock() );
         }
 
     }
 
     private int buscarArticulo() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("ingrese el codigo del articulo a sacar");
+        System.out.println("ingrese el codigo del articulo");
         String codigo = sc.next();
         Articulo articuloEncontrado = null;
-           for (Articulo articulo : listadoArticulos){
-               if (codigo.equals(articulo.getCodigo())){
-                    articuloEncontrado=articulo;
-                    break;
-               }
-           }
-           return listadoArticulos.indexOf(articuloEncontrado);
+        for (Articulo articulo : listadoArticulos) {
+            if (codigo.equals(articulo.getCodigo())) {
+                articuloEncontrado = articulo;
+                break;
+            }
 
         }
-    private void saleArticulo(){
-        
+        return listadoArticulos.indexOf(articuloEncontrado);
+    }
+    private void saleArticulo () {
+        System.out.println("vas a sacar un articulo");
+        int codigo = buscarArticulo();
+        if (codigo != -1) {
+            Articulo articuloEliminado = listadoArticulos.remove(codigo);
+            System.out.println("articulo eliminado: " + articuloEliminado.getCodigo());
+        }else {
+            System.out.println("no se encontro el articulo");
+        }
     }
 
     private void modificarArticulo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("vas a modificar un articulo");
+        int codigo = buscarArticulo();
+        if (codigo != -1) {
+            Articulo articuloModificado = listadoArticulos.get(codigo);
+            System.out.println("ingrese la nueva descripcion del articulo");
+            String descripcion = sc.nextLine();
+            articuloModificado.setDescripcion(descripcion);
+            System.out.println("ingrese el nuevo precio compra");
+            String precioCompra = sc.next();
+            articuloModificado.setPrecioCompra(precioCompra);
+            System.out.println("ingrese el nuevo precio venta");
+            String precioVenta = sc.next();
+            articuloModificado.setPrecioVenta(precioVenta);
+            System.out.println("ingrese la nueva cantidad del articulo");
+            int cantidad = sc.nextInt();
+            articuloModificado.setSrock(cantidad);
+            System.out.println("articulo modificado con exito");
+        }else {
+            System.out.println("no se encontro el codigo del articulo");
+        }
     }
 
     private void masStockArticulo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("vas a incrementar el stock de un articulo");
+        int codigo = buscarArticulo();
+        Articulo articuloAumenta = listadoArticulos.get(codigo);
+        System.out.println("cuanta mercancia va a ingresar");
+        int mercancia = sc.nextInt();
+        int cantidad = mercancia+articuloAumenta.getSrock();
+        articuloAumenta.setSrock(cantidad);
+        System.out.println("mercansia ingresada con exito");
     }
 
     private void menosSrockArticulo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("vas a disminuir la cantidad de Stock de la tienda");
+        int codigo = buscarArticulo();
+        Articulo articuloAumenta = listadoArticulos.get(codigo);
+        System.out.println("cuanta mercancia va a sacar");
+        int mercancia = sc.nextInt();
+        if (mercancia<=articuloAumenta.getSrock()) {
+            int total = articuloAumenta.getSrock() - mercancia ;
+            articuloAumenta.setSrock(total);
+            System.out.println("mercancia sacada con exito");
+        }
+        else{
+            System.out.println("va a sacar mas mercancia de la disponible");
+        }
     }
 
     private void datosArticulo() {

@@ -117,15 +117,16 @@ public class GestionAlmacen {
         Articulo articuloAumenta = listadoArticulos.get(codigo);
         System.out.println("cuanta mercancia va a sacar");
         int mercancia = sc.nextInt();
-        if (mercancia<=articuloAumenta.getSrock()) {
+        if (mercancia<=articuloAumenta.getSrock()){
             int total = articuloAumenta.getSrock() - mercancia ;
             articuloAumenta.setSrock(total);
             System.out.println("mercancia sacada con exito");
-        }
-        else{
+
+        }else () {
             System.out.println("va a sacar mas mercancia de la disponible");
         }
-    }
+        }
+
 
     private void datosArticulo() {
         Scanner sc = new Scanner(System.in);

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class GestionAlmacen {
     private ArrayList<Articulo> listadoArticulos;
+    private static int contadorModificaciones = 0;
 
     public GestionAlmacen() {
         listadoArticulos = new ArrayList<>();
@@ -68,7 +69,7 @@ public class GestionAlmacen {
         int codigo = buscarArticulo();
         if (codigo != -1) {
             Articulo articuloEliminado = listadoArticulos.remove(codigo);
-            System.out.println("articulo eliminado: " + articuloEliminado.getCodigo());
+            System.out.println("articulo eliminado: " + articuloEliminado.getCodigo() );
         }else {
             System.out.println("no se encontro el articulo");
         }
@@ -92,7 +93,9 @@ public class GestionAlmacen {
             System.out.println("ingrese la nueva cantidad del articulo");
             int cantidad = sc.nextInt();
             articuloModificado.setSrock(cantidad);
-            System.out.println("articulo modificado con exito");
+            System.out.println("articulo modificado con exito ");
+            contadorModificaciones++;
+            System.out.println("cantidad de articulos modificados: " + contadorModificaciones);
         }else {
             System.out.println("no se encontro el codigo del articulo");
         }
@@ -122,9 +125,8 @@ public class GestionAlmacen {
             articuloAumenta.setSrock(total);
             System.out.println("mercancia sacada con exito");
 
-        }else () {
-            System.out.println("va a sacar mas mercancia de la disponible");
-        }
+        }else System.out.println("va a sacar mas mercancia de la disponible");
+
         }
 
 

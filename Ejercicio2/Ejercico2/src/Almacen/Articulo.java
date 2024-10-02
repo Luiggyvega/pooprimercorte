@@ -14,10 +14,12 @@ public class Articulo {
         this.precioVenta = precioVenta;
         this.srock = srock;
     }
+    private static int contadorModificaciones = 0;
 
     public String getCodigo() {
         return codigo;
     }
+
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
@@ -54,4 +56,6 @@ public class Articulo {
     public void setSrock(int srock) {
         this.srock = srock;
     }
+
+
 }

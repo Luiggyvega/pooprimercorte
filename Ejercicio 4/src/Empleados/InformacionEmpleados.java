@@ -77,7 +77,7 @@ public class InformacionEmpleados {
         return contraseña;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCargo() {
+        return cargo;
     }
 }
